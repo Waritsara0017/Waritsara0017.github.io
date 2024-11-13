@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('head').load('head.html')
+            $('#bodys').load('body.html')
+            $('#foots').load('foot.html')
+        })
+    </script>
+    <title>Document</title>
+
+    <script>
+
+        sid = []
+        sname = []
+        dept = []
+
+        if (localStorage.getItem('sid') != null &&
+        localStorage.getItem('sname') != null &&
+        localStorage.getItem('dept') != null ) {
+
+            sid = JSON.parse(localStorage.getItem('sid'))
+            sname = JSON.parse(localStorage.getItem('sname'))
+            dept = JSON.parse(localStorage.getItem('dept'))
+
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="bodys"></div>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 5rem;">
+
+        <div class="card mt-3" style="width: 50rem;">
+            <img src="https://i.pinimg.com/564x/be/92/fe/be92fefb36653a7b2a84f7ee707a1a86.jpg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">Student System</h5>
+                <p class="card-text">
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="sid" placeholder="">
+                        <label> Student ID </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="sname" placeholder="">
+                        <label> Fullname </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="dept" aria-label="Default select example">
+                            <option selected> Department </option>
+                            <option value="ช่างกลโรงงาน">ช่างกลโรงงาน</option>
+                            <option value="ไฟฟ้ากำลัง">ไฟฟ้ากำลัง</option>
+                            <option value="เทคโนโลยีสารสนเทศ">เทคโนโลยีสารสนเทศ</option>
+                            <option value="ช่างก่อสร้าง">ช่างก่อสร้าง</option>
+                        </select>
+                    </div>
+                </p>
+                <button type="submit" class="btn btn-success w-25" onclick="click_submit()" >Submit</button>
+                <button type="reset" class="btn btn-primary w-25" onclick="clear_from()" >Reset</button>
+                <table class="table table-bordered table-hover table-striped border border-primary border-3 mt-3">
+                    <thead class="table-primary">
+                      <tr>
+                        <th >Student ID</th>
+                        <th >Fullname</th>
+                        <th >Department</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <script>
+                            for (let i = 0; i < sid.length; i++) {
+                                document.write('<tr>')
+                                document.write('<td>' + sid[i] + '</td>')
+                                document.write('<td>' + sname[i] + '</td>')
+                                document.write('<td>' + dept[i] + '</td>')
+                                document.write('</tr>')
+                        
+                            }
+                        </script>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <script>
+
+        console.log(sid)
+        console.log(sname)
+        console.log(dept)
+        
+
+        function click_submit() {
+            sid.push(document.getElementById('sid').value)
+            sname.push(document.getElementById('sname').value)
+            dept.push(document.getElementById('dept').value)
+
+            localStorage.setItem('sid', JSON.stringify(sid))
+            localStorage.setItem('sname', JSON.stringify(sname))
+            localStorage.setItem('dept', JSON.stringify(dept))
+
+            clear_from()
+
+            location.href = 'page01.html'
+
+        }
+
+        function clear_from() {
+            document.getElementById('sid').value = ''
+            document.getElementById('sname').value = ''
+            document.getElementById('dept').selectedIndex = 0  
+        }
+    </script>
+
+
+
+
+    <div id="foots"></div>
+</body>
+
+</html>
